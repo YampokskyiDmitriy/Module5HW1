@@ -15,7 +15,7 @@ namespace Module5HW1.Services
         public async Task<T?> SendAsync<T>(HttpMethod httpMethod, string url, object? content = null)
         {
             var request = new HttpRequestMessage(httpMethod, url);
-            if (content is not null)
+            if (content != null)
             {
                 var httpContent = new StringContent(
                 JsonConvert.SerializeObject(content), System.Text.Encoding.UTF8, "application/json");
