@@ -20,22 +20,19 @@ namespace Module5HW1.Services
         public async Task<NotFoundResponse?> GetListResourceNotFoundAsync()
         {
             var url = @$"{_baseUrl}/api/unknown";
-            var responseMessage = await _httpService.SendAsync(HttpMethod.Get, url);
-            return JsonConvert.DeserializeObject<NotFoundResponse>(await responseMessage.Content.ReadAsStringAsync());
+            return await _httpService.SendAsync<NotFoundResponse>(HttpMethod.Get, url);
         }
 
         public async Task<SingleResourceResponse?> GetResourceAsync(int id)
         {
-            var url = $"{_baseUrl}/unknown/{id}";
-            var responseMessage = await _httpService.SendAsync(HttpMethod.Get, url);
-            return JsonConvert.DeserializeObject<SingleResourceResponse>(await responseMessage.Content.ReadAsStringAsync());
+            var url = @$"{_baseUrl}/api/unknown/{id}";
+            return await _httpService.SendAsync<SingleResourceResponse>(HttpMethod.Get, url);
         }
 
         public async Task<ResourceListResponse?> GetResourcesAsync()
         {
-            var url = $"{_baseUrl}/unknown";
-            var responseMessage = await _httpService.SendAsync(HttpMethod.Get, url);
-            return JsonConvert.DeserializeObject<ResourceListResponse>(await responseMessage.Content.ReadAsStringAsync());
+            var url = @$"{_baseUrl}/api/unknown";
+            return await _httpService.SendAsync<ResourceListResponse>(HttpMethod.Get, url);
         }
     }
 }

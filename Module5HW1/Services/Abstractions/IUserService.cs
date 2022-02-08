@@ -11,7 +11,7 @@ namespace Module5HW1.Services.Abstractions
         public Task<UpdateUserResponse?> UpdateAsyncPut();
         public Task<UpdateUserResponse?> UpdateAsyncPatch();
         public Task<NotFoundResponse?> GetSingleUserNotFoundAsync();
-        public Task DeleteAsync(int id);
+        public Task<NotFoundResponse?> DeleteAsync(int id);
         public Task<UserListResponse?> GetDelayedAsync();
     }
 }

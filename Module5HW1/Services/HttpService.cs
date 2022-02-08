@@ -12,12 +12,19 @@ namespace Module5HW1.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<HttpResponseMessage> SendAsync(HttpMethod httpMethod, string url, HttpContent? content = null)
+        public async Task<T?> SendAsync<T>(HttpMethod httpMethod, string url, object? content = null)
         {
             var request = new HttpRequestMessage(httpMethod, url);
-            request.Content = content;
+            if (content is not null)
+            {
+                var httpContent = new StringContent(
+                JsonConvert.SerializeObject(content), System.Text.Encoding.UTF8, "application/json");
+                request.Content = httpContent;
+            }
+
             var response = await _httpClient.SendAsync(request);
-            return response;
+            var jsonContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(jsonContent);
         }
     }
 }
